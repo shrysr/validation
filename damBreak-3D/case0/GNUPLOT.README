@@ -1,0 +1,5 @@
+#How to plot the reuslts using gnuplot
+
+plot 'postProcessing/water_in_domain/0/volRegion.dat' u 1:2 w l
+
+plot 'SPHERIC_Test2/case.txt' u 1:2 w l, 'postProcessing/probes1/0/p' u 1:2 w l

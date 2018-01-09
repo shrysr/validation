@@ -1,0 +1,36 @@
+#How to run me:
+
+#To clean the directory, this is optional
+
+foamCleanTutorials
+foamCleanPolyMesh
+
+#To create the mesh
+
+blockMesh > blockMesh.log
+surfaceFeatureExtract > surfaceFeatureExtract.log
+snappyHexMesh -overwrite > snappyHexMesh.log
+renumberMesh -overwrite > renumberMesh.log
+checkMesh
+
+#Erase time folder 0 and then create and empty one
+
+rm -r 0
+mkdir 0
+
+#To initialize the fields
+
+cp -r 0_org/* 0
+setFields > setFields.log
+
+#To setup the right boundary conditions type
+#If you want you can setup the boundary type manualy
+
+cp system/boundary constant/polyMesh/boundary
+
+#To run in parallel (with 4 procs)
+
+decomposePar
+mpirun -np 4 interFoam -parallel > interFoam.log
+reconstructPar > reconstructPar.log
+
