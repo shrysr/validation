@@ -1,0 +1,20 @@
+set term pngcairo size 1600,600
+set output 'flapping-naca0005-force-history.png'
+set termoption dash
+
+set multiplot layout 1,2 columnsfirst title "Flapping NACA0005" font ",16"
+
+set grid
+set key font ",10"
+
+set ylabel 'Force Coefficient'
+set xlabel 'Time (sec)'
+
+set title "Lift Coefficient"
+plot 'case0/postProcessing/forces/0/coefficient.dat' every ::10 using 1:4 w lines lw 2 lt 2 lc 3 title 'RBF - multiMotion'
+
+unset ylabel
+
+set title "Drag Coefficient"
+plot  'case0/postProcessing/forces/0/coefficient.dat' every ::10 using 1:3 w lines lw 2 lt 2 lc 3 title 'RBF - multiMotion'
+
